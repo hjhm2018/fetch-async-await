@@ -1,3 +1,20 @@
+let array;
+
+let container = document.getElementById('container');
+
+let drawComments = () => {
+
+    array.forEach(item => {
+
+        container.innerHTML += `
+            <div class="box">
+                <p class="name"><b>${item.name.charAt(0).toUpperCase()}${item.name.slice(1)}</b></p>
+                <small class="email">${item.email}</small>
+                <p class="comment">${item.body.charAt(0).toUpperCase()}${item.body.slice(1)}</p>
+            </div>
+        `
+    });
+}
 
 let ajax = async () => {
 
@@ -6,8 +23,11 @@ let ajax = async () => {
 
         let data = await response.json();
 
-        console.log(data);
+        data.splice(10);
 
+        array = data;
+
+        drawComments();
 
     } catch (error) {
         console.log(error);
